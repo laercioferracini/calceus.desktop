@@ -39,7 +39,7 @@ public class Gerenciador extends JFrame {
 		JMenu mnProduto = new JMenu("Produto");
 		menuBar.add(mnProduto);
 		
-		JMenuItem mntmComprarProduto = new JMenuItem("Comprar Produto");
+		JMenuItem mntmComprarProduto = new JMenuItem("Comprar Produto\r\n\r\n");
 		mntmComprarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ComprarProduto cp = new ComprarProduto();
@@ -49,6 +49,9 @@ public class Gerenciador extends JFrame {
 			}
 		});
 		mnProduto.add(mntmComprarProduto);
+		
+		JMenuItem mntmConsultarProduto = new JMenuItem("Consultar Produto");
+		mnProduto.add(mntmConsultarProduto);
 		
 		JMenu mnFornecedor = new JMenu("Fornecedor");
 		menuBar.add(mnFornecedor);
