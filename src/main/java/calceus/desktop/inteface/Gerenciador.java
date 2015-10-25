@@ -1,19 +1,19 @@
 package calceus.desktop.inteface;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import calceus.desktop.inteface.fornecedor.ConsultarFornecedor;
 import calceus.desktop.inteface.produto.ComprarProduto;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class Gerenciador extends JFrame {
 
@@ -33,11 +33,8 @@ public class Gerenciador extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 777, 21);
-		contentPane.add(menuBar);
 		
 		JMenu mnProduto = new JMenu("Produto");
 		menuBar.add(mnProduto);
@@ -58,5 +55,28 @@ public class Gerenciador extends JFrame {
 		
 		JMenuItem mntmCadastrarFornecedor = new JMenuItem("Cadastrar Fornecedor");
 		mnFornecedor.add(mntmCadastrarFornecedor);
+		
+		JMenuItem mntmConsultarFornecedor = new JMenuItem("Consultar Fornecedor");
+		mntmConsultarFornecedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConsultarFornecedor cf = new  ConsultarFornecedor();
+				cf.setVisible(true);
+			}
+		});
+		mnFornecedor.add(mntmConsultarFornecedor);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(423, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 }
