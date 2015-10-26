@@ -16,6 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Dimension;
 
 public class ConsultarFornecedor extends JDialog {
 
@@ -42,7 +43,7 @@ public class ConsultarFornecedor extends JDialog {
 	 */
 	public ConsultarFornecedor() {
 		setTitle("Consultar Fornecedor");
-		setBounds(100, 100, 742, 463);
+		setBounds(100, 100, 811, 468);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -50,15 +51,16 @@ public class ConsultarFornecedor extends JDialog {
 		JPanel jpTipoConsulta = new JPanel();
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setMinimumSize(new Dimension(17, 17));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-						.addComponent(jpTipoConsulta, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 714, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+						.addComponent(jpTipoConsulta, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE))
+					.addGap(0))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -66,8 +68,8 @@ public class ConsultarFornecedor extends JDialog {
 					.addContainerGap()
 					.addComponent(jpTipoConsulta, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 					.addGap(39)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(57, Short.MAX_VALUE))
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+					.addGap(57))
 		);
 		
 		tabelaFornecedor = new JTable();
