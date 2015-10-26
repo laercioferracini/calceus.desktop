@@ -37,6 +37,7 @@ public class Gerenciador extends JFrame {
 	private JTextField txtGenero;
 	private JTextField txtCor;
 	private JTextField txtNotaFiscal;
+	private JPanel painelCadastrarProduto = new JPanel();
 	
 
 	/**
@@ -81,6 +82,14 @@ public class Gerenciador extends JFrame {
 		JMenuItem mntmExcluirProduto = new JMenuItem("Excluir Produto");
 		mnProduto.add(mntmExcluirProduto);
 		
+		JMenuItem mntmCadastrarProduto = new JMenuItem("Cadastrar Produto");
+		mntmCadastrarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				painelCadastrarProduto.setVisible(true);
+			}
+		});
+		mnProduto.add(mntmCadastrarProduto);
+		
 		JMenu mnFornecedor = new JMenu("Fornecedor");
 		menuBar.add(mnFornecedor);
 		
@@ -102,7 +111,7 @@ public class Gerenciador extends JFrame {
 		JMenuItem mntmExcluirFornecedor = new JMenuItem("Excluir Fornecedor");
 		mnFornecedor.add(mntmExcluirFornecedor);
 		
-		JPanel painelCadastrarProduto = new JPanel();
+		
 		painelCadastrarProduto.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(147, 112, 219), null, new Color(123, 104, 238), null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -122,6 +131,7 @@ public class Gerenciador extends JFrame {
 					.addContainerGap())
 		);
 		painelCadastrarProduto.setLayout(null);
+		painelCadastrarProduto.setVisible(false);
 		
 		JLabel lblCategoria = new JLabel("CATEGORIA");
 		lblCategoria.setBounds(10, 27, 67, 14);
