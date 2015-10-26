@@ -13,6 +13,8 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProgramaPrincipal {
 
@@ -24,6 +26,7 @@ public class ProgramaPrincipal {
 	private JTextField txgGenero;
 	private JTextField txtCor;
 	private JTextField txtNotaFiscal;
+	private JPanel panelCadastrarProduto = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -63,6 +66,11 @@ public class ProgramaPrincipal {
 		menuBar.add(mnProduto);
 		
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar Produto");
+		mntmCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelCadastrarProduto.setVisible(true);
+			}
+		});
 		mnProduto.add(mntmCadastrar);
 		
 		JMenuItem mntmConsultar = new JMenuItem("Consultar Produto");
@@ -74,8 +82,8 @@ public class ProgramaPrincipal {
 		JMenuItem mntmExcluirProduto = new JMenuItem("Excluir Produto");
 		mnProduto.add(mntmExcluirProduto);
 		
-		JMenuItem mntmConsultarPromoo = new JMenuItem("Consultar Promo\u00E7\u00E3o");
-		mnProduto.add(mntmConsultarPromoo);
+		JMenuItem mntmConsultarPromcao = new JMenuItem("Consultar Promo\u00E7\u00E3o");
+		mnProduto.add(mntmConsultarPromcao);
 		
 		JMenu mnFornecedor = new JMenu("Fornecedor");
 		menuBar.add(mnFornecedor);
@@ -95,7 +103,7 @@ public class ProgramaPrincipal {
 		JPanel panelCadastrarProduto = new JPanel();
 		frame.getContentPane().add(panelCadastrarProduto, BorderLayout.CENTER);
 		panelCadastrarProduto.setLayout(null);
-		
+		panelCadastrarProduto.setVisible(false);
 		JLabel lblCategoria = new JLabel("CATEGORIA");
 		lblCategoria.setBounds(10, 23, 59, 14);
 		panelCadastrarProduto.add(lblCategoria);
@@ -166,9 +174,5 @@ public class ProgramaPrincipal {
 		txtNotaFiscal.setBounds(89, 192, 86, 20);
 		panelCadastrarProduto.add(txtNotaFiscal);
 		txtNotaFiscal.setColumns(10);
-		
-		JComboBox cmbCategoria = new JComboBox();
-		cmbCategoria.setBounds(110, 20, 28, 20);
-		panelCadastrarProduto.add(cmbCategoria);
 	}
 }
