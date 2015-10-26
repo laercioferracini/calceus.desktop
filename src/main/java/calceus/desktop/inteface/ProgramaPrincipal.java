@@ -1,4 +1,4 @@
-package calceus.desktop.telas.principal;
+package calceus.desktop.inteface;
 
 import java.awt.EventQueue;
 
@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ProgramaPrincipal {
+public class ProgramaPrincipal extends JFrame {
 
 	private JFrame frame;
 	private JTextField txtNomeProduto;
@@ -32,6 +32,7 @@ public class ProgramaPrincipal {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		setAparencia();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -174,5 +175,6 @@ public class ProgramaPrincipal {
 		txtNotaFiscal.setBounds(89, 192, 86, 20);
 		panelCadastrarProduto.add(txtNotaFiscal);
 		txtNotaFiscal.setColumns(10);
+		
 	}
 }
