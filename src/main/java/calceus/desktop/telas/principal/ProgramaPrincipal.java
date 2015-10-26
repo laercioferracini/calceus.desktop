@@ -1,20 +1,17 @@
 package calceus.desktop.telas.principal;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ProgramaPrincipal {
 
@@ -56,7 +53,7 @@ public class ProgramaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 482, 300);
+		frame.setBounds(100, 100, 614, 347);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -100,7 +97,7 @@ public class ProgramaPrincipal {
 		JMenuItem mntmExcluirFornecedor = new JMenuItem("Excluir Fornecedor");
 		mnFornecedor.add(mntmExcluirFornecedor);
 		
-		JPanel panelCadastrarProduto = new JPanel();
+		
 		frame.getContentPane().add(panelCadastrarProduto, BorderLayout.CENTER);
 		panelCadastrarProduto.setLayout(null);
 		panelCadastrarProduto.setVisible(false);
