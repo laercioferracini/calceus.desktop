@@ -1,4 +1,4 @@
-package calceus.desktop.inteface.fornecedor;
+package calceus.desktop.interfaces.fornecedor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

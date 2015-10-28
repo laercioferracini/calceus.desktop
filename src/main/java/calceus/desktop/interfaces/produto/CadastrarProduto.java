@@ -1,4 +1,4 @@
-package calceus.desktop.inteface.produto;
+package calceus.desktop.interfaces.produto;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;

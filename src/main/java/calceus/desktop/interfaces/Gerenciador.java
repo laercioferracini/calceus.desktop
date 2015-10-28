@@ -1,4 +1,4 @@
-package calceus.desktop.inteface;
+package calceus.desktop.interfaces;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,10 +19,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import calceus.desktop.inteface.fornecedor.CadastrarFornecedor;
-import calceus.desktop.inteface.fornecedor.ConsultarFornecedor;
-import calceus.desktop.inteface.produto.CadastrarProduto;
-import calceus.desktop.inteface.produto.ComprarProduto;
+import calceus.desktop.interfaces.fornecedor.CadastrarFornecedor;
+import calceus.desktop.interfaces.fornecedor.ConsultarFornecedor;
+import calceus.desktop.interfaces.produto.CadastrarProduto;
+import calceus.desktop.interfaces.produto.ComprarProduto;
+
 import java.awt.CardLayout;
 
 public class Gerenciador extends JFrame {

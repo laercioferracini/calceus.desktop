@@ -1,4 +1,4 @@
-package calceus.desktop.inteface;
+package calceus.desktop.interfaces;
 
 import java.awt.EventQueue;
 
