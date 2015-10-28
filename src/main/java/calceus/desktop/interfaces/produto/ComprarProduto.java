@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import br.com.calceus.DAO.FornecedorDAO;
+import br.com.calceus.ctrl.FornecedorCTRL;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -189,8 +190,11 @@ public class ComprarProduto extends JDialog {
 	}
 	//Aqui chama o fornecedor do banco
 	private void preencheFornecedor() {
-		FornecedorDAO dao = new FornecedorDAO();
-		cbFornecedor.addItem(dao.listar().toString());
+		FornecedorCTRL ctrl = new FornecedorCTRL();
+		for (String forn : ctrl.listar()) {
+			cbFornecedor.addItem(forn);
+		}
+		
 		
 	}
 }

@@ -2,14 +2,20 @@ package calceus.desktop.interfaces.fornecedor;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
+
+import br.com.calceus.ctrl.FornecedorCTRL;
+
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadastrarFornecedor extends JPanel {
 	/**
@@ -54,6 +60,21 @@ public class CadastrarFornecedor extends JPanel {
 		taObs.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FornecedorCTRL ctrl = new FornecedorCTRL();
+				String razaoSocial = tfRazaoSocial.getText();
+				String cnpj = tfCNPJ.getText();
+				int telefone = Integer.parseInt(tfDDD.getText() + tfTelefone.getText());
+				String site = tfSite.getText();
+				String obs = taObs.getText();
+				if(ctrl.salvar(razaoSocial, cnpj, telefone, site, obs)){
+					JOptionPane.showMessageDialog(null, "Cadastro realizado com Sucesso");
+				}else{
+					JOptionPane.showMessageDialog(null, "Ops, aconteceu alguma coisa");
+				}
+			}
+		});
 		
 		JButton btnLimpar = new JButton("LIMPAR");
 		
