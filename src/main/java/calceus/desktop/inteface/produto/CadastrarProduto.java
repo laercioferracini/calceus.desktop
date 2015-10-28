@@ -4,110 +4,179 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CadastrarProduto extends JPanel {
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField tfTamanho;
+	private JTextField tfQuantidade;
+	private JTextField tfPreco;
+	private JTextField tfProduto;
+	private JTextField tfMarca;
+	private JTextField tfCor;
 
 	/**
 	 * Create the panel.
 	 */
 	public CadastrarProduto() {
-		setLayout(null);
 		
-		JButton button = new JButton("Cancelar");
-		button.setBounds(523, 228, 89, 23);
-		add(button);
+		JButton btnCancelar = new JButton("Cancelar");
 		
-		JButton button_1 = new JButton("Limpar");
-		button_1.setBounds(395, 228, 89, 23);
-		add(button_1);
+		JButton btnLimpar = new JButton("Limpar");
 		
-		JButton button_2 = new JButton("OK");
-		button_2.setBounds(271, 228, 89, 23);
-		add(button_2);
+		JButton btnOK = new JButton("OK");
 		
 		JLabel label_2 = new JLabel("TAMANHO");
-		label_2.setBounds(10, 166, 67, 14);
-		add(label_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(120, 163, 86, 20);
-		add(textField_1);
+		tfTamanho = new JTextField();
+		tfTamanho.setColumns(10);
 		
 		JLabel label_3 = new JLabel("GENERO");
-		label_3.setBounds(247, 169, 46, 14);
-		add(label_3);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(315, 163, 86, 20);
-		add(textField_2);
 		
 		JLabel label_4 = new JLabel("COR");
-		label_4.setBounds(468, 169, 46, 14);
-		add(label_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(526, 163, 86, 20);
-		add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(449, 110, 108, 20);
-		add(textField_4);
+		tfQuantidade = new JTextField();
+		tfQuantidade.setColumns(10);
 		
 		JLabel label_5 = new JLabel("QUANTIDADE");
-		label_5.setBounds(355, 113, 74, 14);
-		add(label_5);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(120, 107, 86, 20);
-		add(textField_5);
+		tfPreco = new JTextField();
+		tfPreco.setColumns(10);
 		
 		JLabel label_6 = new JLabel("PRE\u00C7O");
-		label_6.setBounds(10, 113, 46, 14);
-		add(label_6);
 		
-		JLabel label_7 = new JLabel("NOME PRODUTO");
-		label_7.setBounds(10, 60, 81, 14);
-		add(label_7);
+		JLabel lblProduto = new JLabel("PRODUTO");
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(120, 57, 86, 20);
-		add(textField_6);
+		tfProduto = new JTextField();
+		tfProduto.setColumns(10);
 		
 		JLabel label_8 = new JLabel("CATEGORIA");
-		label_8.setBounds(10, 14, 67, 14);
-		add(label_8);
 		
 		JLabel label_9 = new JLabel("MARCA");
-		label_9.setBounds(355, 14, 46, 14);
-		add(label_9);
 		
 		JLabel label_10 = new JLabel("FORNECEDOR");
-		label_10.setBounds(355, 60, 74, 14);
-		add(label_10);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(449, 57, 108, 20);
-		add(textField_7);
+		tfMarca = new JTextField();
+		tfMarca.setColumns(10);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(449, 11, 108, 20);
-		add(textField_8);
+		JComboBox cbCategoria = new JComboBox();
+		
+		JComboBox cbFornecedor = new JComboBox();
+		
+		tfCor = new JTextField();
+		tfCor.setColumns(10);
+		
+		JComboBox cbGenero = new JComboBox();
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(10)
+									.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(cbCategoria, 0, 234, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addContainerGap()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblProduto)
+												.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+												.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addGap(11)
+													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+														.addComponent(tfPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addGroup(groupLayout.createSequentialGroup()
+															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+																.addComponent(tfProduto, Alignment.TRAILING)
+																.addGroup(groupLayout.createSequentialGroup()
+																	.addComponent(tfMarca, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+																	.addGap(18)
+																	.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
+															.addPreferredGap(ComponentPlacement.UNRELATED)
+															.addComponent(cbGenero, 0, 76, Short.MAX_VALUE))))
+												.addGroup(groupLayout.createSequentialGroup()
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(tfQuantidade, 0, 0, Short.MAX_VALUE))
+												.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+													.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+													.addGap(18)
+													.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+											.addGap(18)
+											.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))))
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(14)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_8)
+						.addComponent(cbCategoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(17)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_9)
+						.addComponent(tfMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_3)
+						.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_10)
+						.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(19)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblProduto)
+						.addComponent(tfProduto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_6)
+						.addComponent(tfPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_5)
+						.addComponent(tfQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_2)
+						.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_4))
+					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnOK)
+						.addComponent(btnLimpar)
+						.addComponent(btnCancelar))
+					.addContainerGap())
+		);
+		setLayout(groupLayout);
 
 	}
 }

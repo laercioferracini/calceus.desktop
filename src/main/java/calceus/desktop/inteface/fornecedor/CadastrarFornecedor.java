@@ -12,6 +12,10 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CadastrarFornecedor extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5689582140697614565L;
 	private JTextField tfRazaoSocial;
 	private JTextField tfDDD;
 	private JTextField tfTelefone;
@@ -22,16 +26,16 @@ public class CadastrarFornecedor extends JPanel {
 	 */
 	public CadastrarFornecedor() {
 		
-		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social");
+		JLabel lblRazoSocial = new JLabel("RAZÃO SOCIAL");
 		
 		tfRazaoSocial = new JTextField();
 		tfRazaoSocial.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ");
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		JFormattedTextField tfCNPJ = new JFormattedTextField();
 		
-		JLabel lblTelefone = new JLabel("Telefone");
+		JLabel lblTelefone = new JLabel("TELEFONE");
 		
 		tfDDD = new JTextField();
 		tfDDD.setColumns(3);
@@ -39,70 +43,70 @@ public class CadastrarFornecedor extends JPanel {
 		tfTelefone = new JTextField();
 		tfTelefone.setColumns(10);
 		
-		JLabel lblSite = new JLabel("Site");
+		JLabel lblSite = new JLabel("SITE");
 		
 		tfSite = new JTextField();
 		tfSite.setColumns(10);
 		
-		JLabel lblObs = new JLabel("Obs");
+		JLabel lblObs = new JLabel("OBS");
 		
 		JTextArea taObs = new JTextArea();
 		taObs.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JButton btnOk = new JButton("OK");
 		
-		JButton btnLimpar = new JButton("Limpar");
+		JButton btnLimpar = new JButton("LIMPAR");
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("CANCELAR");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(137)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblRazoSocial, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblCnpj)
-								.addComponent(lblTelefone)
 								.addComponent(lblSite)
-								.addComponent(lblObs))
-							.addGap(18))
+								.addComponent(lblObs)
+								.addComponent(lblTelefone)
+								.addComponent(lblRazoSocial))
+							.addGap(23))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnOk)
 							.addGap(36)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(10)
 							.addComponent(btnLimpar)
-							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
 							.addComponent(btnCancelar))
-						.addComponent(taObs, Alignment.LEADING)
-						.addComponent(tfSite, Alignment.LEADING)
-						.addComponent(formattedTextField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-						.addComponent(tfRazaoSocial, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+						.addComponent(tfSite, 181, 181, Short.MAX_VALUE)
+						.addComponent(tfCNPJ, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(tfRazaoSocial, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(tfDDD, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(tfTelefone)))
-					.addContainerGap(169, Short.MAX_VALUE))
+							.addComponent(tfTelefone, 130, 130, 130))
+						.addComponent(taObs, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+					.addGap(265))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(56)
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblRazoSocial)
-						.addComponent(tfRazaoSocial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tfRazaoSocial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblRazoSocial))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCnpj)
-						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tfCNPJ, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTelefone)
 						.addComponent(tfDDD, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tfTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tfTelefone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTelefone))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSite)
@@ -116,7 +120,7 @@ public class CadastrarFornecedor extends JPanel {
 						.addComponent(btnCancelar)
 						.addComponent(btnOk)
 						.addComponent(btnLimpar))
-					.addContainerGap(36, Short.MAX_VALUE))
+					.addContainerGap(73, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
