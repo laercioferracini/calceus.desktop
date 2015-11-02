@@ -9,24 +9,40 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import br.com.calceus.ctrl.MarcaCTRL;
+import br.com.calceus.ctrl.ProdutoCTRL;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 public class CadastrarProduto extends JPanel {
 	private JTextField tfTamanho;
 	private JTextField tfQuantidade;
 	private JTextField tfPreco;
 	private JTextField tfProduto;
-	private JTextField tfMarca;
 	private JTextField tfCor;
+	private JComboBox<String> cbMarca;
+	private JComboBox cbCategoria;
+	private JComboBox cbGenero;
 
 	/**
 	 * Create the panel.
 	 */
 	public CadastrarProduto() {
 		
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		
 		JButton btnLimpar = new JButton("Limpar");
 		
 		JButton btnOK = new JButton("OK");
+		btnOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		
 		JLabel label_2 = new JLabel("TAMANHO");
 		
@@ -58,17 +74,16 @@ public class CadastrarProduto extends JPanel {
 		
 		JLabel label_10 = new JLabel("FORNECEDOR");
 		
-		tfMarca = new JTextField();
-		tfMarca.setColumns(10);
-		
-		JComboBox cbCategoria = new JComboBox();
+		cbCategoria = new JComboBox();
 		
 		JComboBox cbFornecedor = new JComboBox();
 		
 		tfCor = new JTextField();
 		tfCor.setColumns(10);
 		
-		JComboBox cbGenero = new JComboBox();
+		cbGenero = new JComboBox();
+		
+		cbMarca = new JComboBox();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -82,56 +97,52 @@ public class CadastrarProduto extends JPanel {
 							.addGap(18)
 							.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(cbCategoria, 0, 234, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(10)
-									.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(cbCategoria, 0, 234, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblProduto)
+										.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+										.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(11)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblProduto)
-												.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-												.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(tfPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 												.addGroup(groupLayout.createSequentialGroup()
-													.addGap(11)
-													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(tfPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(tfProduto, Alignment.TRAILING)
 														.addGroup(groupLayout.createSequentialGroup()
-															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-																.addComponent(tfProduto, Alignment.TRAILING)
-																.addGroup(groupLayout.createSequentialGroup()
-																	.addComponent(tfMarca, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-																	.addGap(18)
-																	.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
+															.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 															.addPreferredGap(ComponentPlacement.UNRELATED)
-															.addComponent(cbGenero, 0, 76, Short.MAX_VALUE))))
-												.addGroup(groupLayout.createSequentialGroup()
+															.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
 													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+													.addComponent(cbGenero, 0, 76, Short.MAX_VALUE))))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-												.addGroup(groupLayout.createSequentialGroup()
-													.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(tfQuantidade, 0, 0, Short.MAX_VALUE))
-												.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-													.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-													.addGap(18)
-													.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(tfQuantidade, 0, 0, Short.MAX_VALUE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 											.addGap(18)
-											.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))))
-							.addPreferredGap(ComponentPlacement.RELATED)))
+											.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+									.addGap(18)
+									.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -144,9 +155,9 @@ public class CadastrarProduto extends JPanel {
 					.addGap(17)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_9)
-						.addComponent(tfMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_3)
-						.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_10)
@@ -169,7 +180,7 @@ public class CadastrarProduto extends JPanel {
 						.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_4))
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnOK)
 						.addComponent(btnLimpar)
@@ -177,6 +188,20 @@ public class CadastrarProduto extends JPanel {
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
+		
+		//TEM QUE CHAMAR O MÉTODO SOMENTE APÓS O CONSTRUTOR TERMINAR DE CARREGAR O LAYOUT
+		preecheDados();
+	}
 
+	private void preecheDados() {
+		ProdutoCTRL ctrl = new ProdutoCTRL();
+		
+		for (String s : ctrl.listarMarcas()){
+			cbMarca.addItem(s);
+		}
+		
+		for(String s : ctrl.listarCategorias()){
+			cbCategoria.addItem(s);
+		}
 	}
 }

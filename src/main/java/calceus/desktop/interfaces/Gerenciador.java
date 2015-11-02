@@ -19,6 +19,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import br.com.calceus.ctrl.ProdutoCTRL;
+import calceus.desktop.interfaces.categoria.CadastrarCategorias;
 import calceus.desktop.interfaces.fornecedor.CadastrarFornecedor;
 import calceus.desktop.interfaces.fornecedor.ConsultarFornecedor;
 import calceus.desktop.interfaces.produto.CadastrarProduto;
@@ -137,6 +139,30 @@ public class Gerenciador extends JFrame {
 					.addComponent(painelPrincipal, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		
+		JMenu mnMarcas = new JMenu("Marcas");
+		menuBar.add(mnMarcas);
+		
+		JMenuItem mntmCadastrarMarca = new JMenuItem("Cadastrar Marca");
+		mntmCadastrarMarca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarMarcas cadastrarMarcas = new CadastrarMarcas();
+				trocarConteudo(cadastrarMarcas);				
+			}
+		});
+		mnMarcas.add(mntmCadastrarMarca);
+		
+		JMenu mnCategoria = new JMenu("Categoria");
+		menuBar.add(mnCategoria);
+		
+		JMenuItem mntmCadastrarCategoria = new JMenuItem("Cadastrar Categoria");
+		mntmCadastrarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarCategorias cadastrarCategorias = new CadastrarCategorias();
+				trocarConteudo(cadastrarCategorias);
+			}
+		});
+		mnCategoria.add(mntmCadastrarCategoria);
 		painelPrincipal.setLayout(new CardLayout(0, 0));
 		contentPane.setLayout(gl_contentPane);
 		
