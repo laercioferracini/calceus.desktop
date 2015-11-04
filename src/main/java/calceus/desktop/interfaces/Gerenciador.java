@@ -23,8 +23,12 @@ import br.com.calceus.ctrl.ProdutoCTRL;
 import calceus.desktop.interfaces.categoria.CadastrarCategorias;
 import calceus.desktop.interfaces.fornecedor.CadastrarFornecedor;
 import calceus.desktop.interfaces.fornecedor.ConsultarFornecedor;
+import calceus.desktop.interfaces.produto.CadastrarMarcas;
 import calceus.desktop.interfaces.produto.CadastrarProduto;
 import calceus.desktop.interfaces.produto.ComprarProduto;
+import calceus.desktop.interfaces.produto.ConsultarProdutos;
+import calceus.desktop.interfaces.promocoes.CadastrarPromocao;
+import calceus.desktop.interfaces.promocoes.ConsultarPromocoes;
 
 import java.awt.CardLayout;
 
@@ -67,6 +71,12 @@ public class Gerenciador extends JFrame {
 		mnProduto.add(mntmComprarProduto);
 		
 		JMenuItem mntmConsultarProduto = new JMenuItem("Consultar Produto");
+		mntmConsultarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarProdutos consultarProdutos = new ConsultarProdutos();
+				trocarConteudo(consultarProdutos);
+			}
+		});
 		mnProduto.add(mntmConsultarProduto);
 		
 		JMenuItem mntmAlterarProduto = new JMenuItem("Alterar Produto");
@@ -125,10 +135,10 @@ public class Gerenciador extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(menuBar, GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+				.addComponent(menuBar, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(painelPrincipal, GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+					.addComponent(painelPrincipal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(17))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -136,7 +146,7 @@ public class Gerenciador extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(painelPrincipal, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+					.addComponent(painelPrincipal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
@@ -163,10 +173,35 @@ public class Gerenciador extends JFrame {
 			}
 		});
 		mnCategoria.add(mntmCadastrarCategoria);
+		
+		JMenu mnPromoo = new JMenu("Promo\u00E7\u00E3o");
+		menuBar.add(mnPromoo);
+		
+		JMenuItem mntmConsultarPromoes = new JMenuItem("Consultar Promo\u00E7\u00F5es");
+		mntmConsultarPromoes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConsultarPromocoes consultarPromocoes =  new ConsultarPromocoes();
+				trocarConteudo(consultarPromocoes);
+			}
+		});
+		mnPromoo.add(mntmConsultarPromoes);
+		
+		JMenuItem mntmCadastrarPromoo = new JMenuItem("Cadastrar Promo\u00E7\u00E3o");
+		mntmCadastrarPromoo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarPromocao cadastrarPromocao = new CadastrarPromocao();
+				trocarConteudo(cadastrarPromocao);
+			}
+		});
+		mnPromoo.add(mntmCadastrarPromoo);
 		painelPrincipal.setLayout(new CardLayout(0, 0));
 		contentPane.setLayout(gl_contentPane);
 		
 	}
+	/**
+	 * Método para trocar o conteúdo do painel principal.
+	 * @param painel
+	 */
 	private void trocarConteudo(JPanel painel) {
 		painelPrincipal.removeAll();
 		painelPrincipal.add(painel);

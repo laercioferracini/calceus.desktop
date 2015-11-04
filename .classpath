@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Calceus.system"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Calceus.web"/>
 	<classpathentry kind="output" path="deploy/classes/bin"/>
 </classpath>

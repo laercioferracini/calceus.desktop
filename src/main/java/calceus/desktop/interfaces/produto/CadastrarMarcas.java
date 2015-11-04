@@ -1,4 +1,4 @@
-package calceus.desktop.interfaces;
+package calceus.desktop.interfaces.produto;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
