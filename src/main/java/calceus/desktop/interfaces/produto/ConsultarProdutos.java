@@ -13,6 +13,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
 public class ConsultarProdutos extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTable jtProdutos;
