@@ -210,17 +210,20 @@ public class ConsultarFornecedor extends JDialog {
 	}
 	
 	private void excluirFornecedor(int linha) {
-		if(linha < 0){
-			JOptionPane.showMessageDialog(null, "Não há nenhuma linha seleciona ou inexistente.");
-		}else{
-			int cod = (int) tabelaFornecedor.getValueAt(linha, 0);
-			FornecedorCTRL ctrl = new FornecedorCTRL();
-			if(ctrl.excluir(cod)){
-				JOptionPane.showMessageDialog(null, "Excluido");
+		int confirmaExclusao = JOptionPane.showConfirmDialog(null, "Deseja excluir o fornecedor selecionado?");
+		if(confirmaExclusao == 0){
+			if(linha < 0){
+				JOptionPane.showMessageDialog(null, "Não há nenhuma linha seleciona ou inexistente.");
+			}else{
+				int cod = (int) tabelaFornecedor.getValueAt(linha, 0);
+				FornecedorCTRL ctrl = new FornecedorCTRL();
+				if(ctrl.excluir(cod)){
+					JOptionPane.showMessageDialog(null, "Excluido");
+				}
 			}
+			//limpa tabela
+			getModelo().setNumRows(0);
 		}
-		//limpa tabela
-		getModelo().setNumRows(0);
 	}
 
 	

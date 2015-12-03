@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,7 +24,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import br.com.calceus.ctrl.ComprarProdutoCTRL;
 import br.com.calceus.ctrl.FornecedorCTRL;
+import br.com.calceus.modelo.Produto;
 
 public class ComprarProduto extends JDialog {
 
@@ -32,11 +35,14 @@ public class ComprarProduto extends JDialog {
 	 */
 	private static final long serialVersionUID = 3L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField tfNotaFiscal;
 	private JTextField textField_1;
 	private JTable table;
 	private DefaultTableModel modelo;
 	private JComboBox<String> cbFornecedor;
+	private JButton btnRemoverProduto;
+	private JButton btnInserirProduto;
+
 	/**
 	 * Create the dialog.
 	 */
@@ -47,11 +53,9 @@ public class ComprarProduto extends JDialog {
 				preencheFornecedor();
 			}
 
-			
 		});
 		setResizable(false);
-		
-		
+
 		setTitle("Comprar Produto");
 		setModal(true);
 		setBounds(100, 100, 975, 541);
@@ -59,142 +63,184 @@ public class ComprarProduto extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.EAST);
 		cbFornecedor = new JComboBox<String>();
-		JLabel label = new JLabel("Fornecedor");
-		textField = new JTextField();
-		textField.setColumns(10);
-		JLabel label_1 = new JLabel("Nota Fiscal");
+		JLabel lblFornecedor = new JLabel("FORNECEDOR");
+		tfNotaFiscal = new JTextField();
+		tfNotaFiscal.setColumns(10);
+		JLabel lblNotaFiscal = new JLabel("NOTA FISCAL");
 		JLabel label_2 = new JLabel("Data da Nota Fiscal");
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
-		
-		JButton btnInserirProduto = new JButton("Inserir Produto");
+
+		btnInserirProduto = new JButton("INSERIR PRODUTO");
+		btnInserirProduto.setEnabled(false);
 		btnInserirProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				adicionaLinha();
 			}
 
-			
 		});
-		
-		JButton btnRemoverProduto = new JButton("Remover Produto");
+
+		btnRemoverProduto = new JButton("REMOVER PRODUTO");
+		btnRemoverProduto.setEnabled(false);
 		btnRemoverProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removerLinha(getLinha());
 			}
 
-			
 		});
-		
+
+		JButton btnPesquisar = new JButton("PESQUISAR");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ComprarProdutoCTRL ctrl = new ComprarProdutoCTRL();
+				if (!ctrl.consultarNotaFiscal(Integer.parseInt(tfNotaFiscal.getText()))) {
+					cadastrarNota();
+				} else {
+					preencherTabela(ctrl.consultarNotaFiscalEntrada(Integer.parseInt(tfNotaFiscal.getText())));
+					
+				}
+			}
+
+			
+
+		});
+
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(label, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-									.addGap(76)
-									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)))
+										.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(lblNotaFiscal, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblFornecedor, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+								.addGap(18)
+								.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPanel.createSequentialGroup()
+												.addComponent(tfNotaFiscal, GroupLayout.PREFERRED_SIZE, 124,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(btnPesquisar).addGap(50)
+												.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 93,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(18).addComponent(textField_1, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 206,
+												GroupLayout.PREFERRED_SIZE)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 936, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(btnInserirProduto)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnRemoverProduto)))
-					.addContainerGap(13, Short.MAX_VALUE))
-		);
-		gl_contentPanel.setVerticalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label))
-					.addGap(18)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup().addComponent(btnInserirProduto).addGap(10)
+								.addComponent(btnRemoverProduto)))
+						.addContainerGap(13, Short.MAX_VALUE)));
+		gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblFornecedor)
+								.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblNotaFiscal)
+								.addComponent(tfNotaFiscal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnPesquisar))
+						.addGroup(gl_contentPanel.createSequentialGroup().addGap(3).addComponent(label_2))
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+						.addGap(31)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(label_1)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(label_2))
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnInserirProduto)
-						.addComponent(btnRemoverProduto))
-					.addContainerGap(19, Short.MAX_VALUE))
-		);
-		
+								.addComponent(btnRemoverProduto, GroupLayout.PREFERRED_SIZE, 33,
+										GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnInserirProduto, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
 		table = new JTable();
 		table.setModel(getModelo());
-		
+
 		scrollPane.setViewportView(table);
-		
+
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btSalvar = new JButton("Salvar");
+				JButton btSalvar = new JButton("SALVAR");
 				btSalvar.setActionCommand("OK");
 				buttonPane.add(btSalvar);
 				getRootPane().setDefaultButton(btSalvar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("CANCELAR");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
+
 	// Métodos
 	private TableModel getModelo() {
-		
-		
-		String[] colunas = new String[]{"Código", "Produto", "Quant", "Preço Unitário", "Total"};
+
+		String[] colunas = new String[] { "Código", "Produto", "Quant", "Preço Unitário"};
 		modelo = new DefaultTableModel(null, colunas);
-		
-		
+
 		return modelo;
 	}
+
 	private void adicionaLinha() {
-		
-		modelo.addRow(new String[] {"", "", "", "", ""});
+
+		modelo.addRow(new String[] { "", "", "", "" });
 	}
-	private void removerLinha(int linha){
-		if(linha < 0){
+
+	private void removerLinha(int linha) {
+		if (linha < 0) {
 			JOptionPane.showMessageDialog(null, "Não há nenhuma linha seleciona ou inexistente.");
 			return;
-		}else{
+		} else {
 			modelo.removeRow(linha);
 		}
-		
+
 	}
+
 	private int getLinha() {
-		
+
 		return table.getSelectedRow();
 	}
-	//Aqui chama o fornecedor do banco
+
+	// Aqui chama o fornecedor do banco
 	private void preencheFornecedor() {
 		FornecedorCTRL ctrl = new FornecedorCTRL();
 		for (String forn : ctrl.listar()) {
 			cbFornecedor.addItem(forn);
 		}
+
+	}
+
+	private void preencherTabela(List<Produto> produtos) {
 		
-		
+		for (Produto p : produtos) {
+			System.out.println(p.getNomeProduto());
+			modelo.addRow(new Object[] { p.getIdProduto(), p.getNomeProduto(), p.getQuantidade(), p.getValor()});
+		}
+
+	}
+	private void cadastrarNota() {
+		int cadastrarNota = JOptionPane.showConfirmDialog(null, "Nota Fiscal não encontrada\nDeseja cadastrar a nota fiscal?");
+		if(cadastrarNota==0){
+			liberarCadastro(true);
+		}else{
+			
+		}
+	}
+
+	private void liberarCadastro(boolean b) {
+		btnInserirProduto.setEnabled(b);
+		btnRemoverProduto.setEnabled(b);
 	}
 }
