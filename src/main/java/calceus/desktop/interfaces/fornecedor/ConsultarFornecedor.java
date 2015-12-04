@@ -60,7 +60,7 @@ public class ConsultarFornecedor extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				excluirFornecedor(getLinha());
 			}
-			
+
 		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -153,7 +153,7 @@ public class ConsultarFornecedor extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -167,8 +167,6 @@ public class ConsultarFornecedor extends JDialog {
 			}
 		}
 	}
-	
-	
 
 	// MOdelo da tabela
 	private TableModel getTabelaModelo() {
@@ -176,6 +174,7 @@ public class ConsultarFornecedor extends JDialog {
 		modelo = new DefaultTableModel(null, colunas);
 		return modelo;
 	}
+
 	public JTable getTabelaFornecedor() {
 		return tabelaFornecedor;
 	}
@@ -183,7 +182,7 @@ public class ConsultarFornecedor extends JDialog {
 	public void setTabelaFornecedor(JTable tabelaFornecedor) {
 		this.tabelaFornecedor = tabelaFornecedor;
 	}
-	
+
 	public DefaultTableModel getModelo() {
 		return modelo;
 	}
@@ -191,6 +190,7 @@ public class ConsultarFornecedor extends JDialog {
 	public void setModelo(DefaultTableModel modelo) {
 		this.modelo = modelo;
 	}
+
 	private void preencheTabela(List<Fornecedor> listarFornecedores) {
 		for (Fornecedor f : listarFornecedores) {
 			modelo.addRow(new Object[] { f.getIdFornecedor(), f.getRazaoSocial(), f.getCnpj(), f.getTelefone(),
@@ -205,26 +205,26 @@ public class ConsultarFornecedor extends JDialog {
 		else
 			return false;
 	}
+
 	private int getLinha() {
 		return tabelaFornecedor.getSelectedRow();
 	}
-	
+
 	private void excluirFornecedor(int linha) {
 		int confirmaExclusao = JOptionPane.showConfirmDialog(null, "Deseja excluir o fornecedor selecionado?");
-		if(confirmaExclusao == 0){
-			if(linha < 0){
+		if (confirmaExclusao == 0) {
+			if (linha < 0) {
 				JOptionPane.showMessageDialog(null, "Não há nenhuma linha seleciona ou inexistente.");
-			}else{
+			} else {
 				int cod = (int) tabelaFornecedor.getValueAt(linha, 0);
 				FornecedorCTRL ctrl = new FornecedorCTRL();
-				if(ctrl.excluir(cod)){
+				if (ctrl.excluir(cod)) {
 					JOptionPane.showMessageDialog(null, "Excluido");
 				}
 			}
-			//limpa tabela
+			// limpa tabela
 			getModelo().setNumRows(0);
 		}
 	}
 
-	
 }
