@@ -2,6 +2,7 @@ package calceus.desktop.interfaces.produto;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -193,8 +194,13 @@ public class CadastrarProduto extends JPanel {
 	private void preecheDados() {
 		ProdutoCTRL ctrl = new ProdutoCTRL();
 		
-		for (String s : ctrl.listarMarcas()){
-			cbMarca.addItem(s);
+		try {
+			for (String s : ctrl.listarMarcas()){
+				cbMarca.addItem(s);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		for(String s : ctrl.listarCategorias()){

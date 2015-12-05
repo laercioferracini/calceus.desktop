@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
 public class CadastrarMarcas extends JPanel {
@@ -53,10 +55,18 @@ public class CadastrarMarcas extends JPanel {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MarcaCTRL ctrl = new MarcaCTRL();
-				if(ctrl.salvar(textField.getText())){
-					JOptionPane.showMessageDialog(null, "Marca cadastrada com sucesso");
-				}else{
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar, marca já cadastrada ou problemas de conexão");
+				try {
+					if(ctrl.salvar(textField.getText())){
+						JOptionPane.showMessageDialog(null, "Marca cadastrada com sucesso");
+					}else{
+						JOptionPane.showMessageDialog(null, "Erro ao cadastrar, marca já cadastrada ou problemas de conexão");
+					}
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
