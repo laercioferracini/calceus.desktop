@@ -10,15 +10,20 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.calceus.ctrl.ProdutoCTRL;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultarProdutos extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2L;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfCodigo;
+	private JTextField tfProduto;
 	private JTable jtProdutos;
 
 	/**
@@ -118,14 +123,28 @@ public class ConsultarProdutos extends JPanel {
 		panel_1.setLayout(gl_panel_1);
 		
 		JRadioButton rdbtnCdigo = new JRadioButton("C\u00F3digo");
+		rdbtnCdigo.setIgnoreRepaint(true);
+		rdbtnCdigo.setMnemonic('c');
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		tfCodigo = new JTextField();
+		tfCodigo.setColumns(10);
 		
 		JRadioButton rdbtnProduto = new JRadioButton("Produto");
+		rdbtnProduto.setIgnoreRepaint(true);
+		rdbtnProduto.setMnemonic('c');
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		tfProduto = new JTextField();
+		tfProduto.setColumns(10);
+		
+		JButton btnPesquisar = new JButton("PESQUISAR");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rdbtnCdigo.isSelected()){
+					ProdutoCTRL ctrl = new ProdutoCTRL();
+					ctrl.listarProduto(Integer.valueOf(tfCodigo.getText()));
+				}
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -133,12 +152,14 @@ public class ConsultarProdutos extends JPanel {
 					.addContainerGap()
 					.addComponent(rdbtnCdigo)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(tfCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(rdbtnProduto)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(214, Short.MAX_VALUE))
+					.addComponent(tfProduto, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnPesquisar)
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -146,10 +167,11 @@ public class ConsultarProdutos extends JPanel {
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(rdbtnCdigo)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tfCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(rdbtnProduto)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(8, Short.MAX_VALUE))
+						.addComponent(tfProduto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnPesquisar))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
