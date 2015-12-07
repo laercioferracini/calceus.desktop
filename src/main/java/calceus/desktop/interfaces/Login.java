@@ -149,7 +149,7 @@ public class Login extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LoginCTRL ctrl = new LoginCTRL();
-				if (ctrl.autentica(tfLogin.getText(), String.valueOf(pfSenha.getPassword()))) {
+				if (ctrl.autenticaFuncionario(tfLogin.getText(), String.valueOf(pfSenha.getPassword()))) {
 					Gerenciador window = new Gerenciador();
 					window.setVisible(true);
 					window.setLocationRelativeTo(null);

@@ -98,7 +98,7 @@ public class ComprarProduto extends JDialog {
 				if (!ctrl.consultarNotaFiscal(Integer.parseInt(tfNotaFiscal.getText()))) {
 					cadastrarNota();
 				} else {
-					preencherTabela(ctrl.consultarNotaFiscalEntrada(Integer.parseInt(tfNotaFiscal.getText())));
+					preencherTabela(ctrl.consultarProdutosNotaFiscal(Integer.parseInt(tfNotaFiscal.getText())));
 					
 				}
 			}
