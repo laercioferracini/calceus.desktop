@@ -180,7 +180,7 @@ public class ComprarProduto extends JDialog {
 							System.out.println(modelo.getValueAt(i, 1).toString());
 							itemCompra.setQuantidade(Integer.valueOf(modelo.getValueAt(i, 2).toString()));
 							System.out.println(modelo.getValueAt(i, 2).toString());
-//							itemCompra.getProduto().setQuantidade(Integer.valueOf(modelo.getValueAt(i, 2).toString()));
+							itemCompra.getProduto().setQuantidade(Integer.valueOf(modelo.getValueAt(i, 2).toString()));
 							itemCompra.getProduto().setValor(Double.valueOf(modelo.getValueAt(i, 3).toString()));
 							System.out.println(modelo.getValueAt(i, 3).toString());
 

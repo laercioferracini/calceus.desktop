@@ -126,7 +126,7 @@ public class Login extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_ENTER) {
-					Toolkit.getDefaultToolkit().beep();
+//					Toolkit.getDefaultToolkit().beep();
 					autentica();
 				}
 
