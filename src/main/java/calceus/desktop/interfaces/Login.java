@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +25,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 
 import br.com.calceus.ctrl.LoginCTRL;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -76,6 +79,11 @@ public class Login extends JFrame {
 		btnOk.setFont(new Font("Dialog", Font.BOLD, 15));
 
 		JButton btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 15));
 
 		JPanel panel = new JPanel();
@@ -113,6 +121,18 @@ public class Login extends JFrame {
 		tfLogin.setColumns(15);
 
 		pfSenha = new JPasswordField();
+		pfSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					Toolkit.getDefaultToolkit().beep();
+					autentica();
+				}
+
+			}
+		});
+
 		pfSenha.setFont(new Font("Dialog", Font.BOLD, 15));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -147,15 +167,13 @@ public class Login extends JFrame {
 				Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE));
 		contentPane.setLayout(gl_contentPane);
 		btnOk.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent arg0) {
-				LoginCTRL ctrl = new LoginCTRL();
-				if (ctrl.autenticaFuncionario(tfLogin.getText(), String.valueOf(pfSenha.getPassword()))) {
-					Gerenciador window = new Gerenciador();
-					window.setVisible(true);
-					window.setLocationRelativeTo(null);
-					dispose();// fecha esta tela
-				}
+				autentica();
 			}
+
+			
+
 		});
 	}
 
@@ -173,6 +191,15 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} catch (IllegalAccessException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+	}
+	private void autentica() {
+		LoginCTRL ctrl = new LoginCTRL();
+		if (ctrl.autenticaFuncionario(tfLogin.getText(), String.valueOf(pfSenha.getPassword()))) {
+			Gerenciador window = new Gerenciador();
+			window.setVisible(true);
+			window.setLocationRelativeTo(null);
+			dispose();// fecha esta tela
 		}
 	}
 }

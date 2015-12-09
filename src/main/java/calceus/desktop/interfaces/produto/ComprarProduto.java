@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -26,6 +27,7 @@ import javax.swing.table.TableModel;
 
 import br.com.calceus.ctrl.ComprarProdutoCTRL;
 import br.com.calceus.ctrl.FornecedorCTRL;
+import br.com.calceus.modelo.ItemCompra;
 import br.com.calceus.modelo.Produto;
 
 public class ComprarProduto extends JDialog {
@@ -36,7 +38,7 @@ public class ComprarProduto extends JDialog {
 	private static final long serialVersionUID = 3L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfNotaFiscal;
-	private JTextField textField_1;
+	private JTextField tfData;
 	private JTable table;
 	private DefaultTableModel modelo;
 	private JComboBox<String> cbFornecedor;
@@ -68,8 +70,8 @@ public class ComprarProduto extends JDialog {
 		tfNotaFiscal.setColumns(10);
 		JLabel lblNotaFiscal = new JLabel("NOTA FISCAL");
 		JLabel label_2 = new JLabel("Data da Nota Fiscal");
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		tfData = new JTextField();
+		tfData.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
 
@@ -99,11 +101,9 @@ public class ComprarProduto extends JDialog {
 					cadastrarNota();
 				} else {
 					preencherTabela(ctrl.consultarProdutosNotaFiscal(Integer.parseInt(tfNotaFiscal.getText())));
-					
+
 				}
 			}
-
-			
 
 		});
 
@@ -124,7 +124,7 @@ public class ComprarProduto extends JDialog {
 												.addGap(18).addComponent(btnPesquisar).addGap(50)
 												.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 93,
 														GroupLayout.PREFERRED_SIZE)
-												.addGap(18).addComponent(textField_1, GroupLayout.PREFERRED_SIZE,
+												.addGap(18).addComponent(tfData, GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 206,
 												GroupLayout.PREFERRED_SIZE)))
@@ -144,7 +144,7 @@ public class ComprarProduto extends JDialog {
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnPesquisar))
 						.addGroup(gl_contentPanel.createSequentialGroup().addGap(3).addComponent(label_2))
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(tfData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE))
 						.addGap(31)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
@@ -167,6 +167,35 @@ public class ComprarProduto extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btSalvar = new JButton("SALVAR");
+				btSalvar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						List<ItemCompra> lista = new ArrayList<>();
+						ItemCompra itemCompra = null;
+						for (int i = 0; i < modelo.getRowCount(); i++) {
+
+							itemCompra = new ItemCompra();
+							itemCompra.setNumSequencial(Integer.valueOf(modelo.getValueAt(i, 0).toString()));
+							System.out.println(modelo.getValueAt(i, 0).toString());
+							itemCompra.getProduto().setNomeProduto(modelo.getValueAt(i, 1).toString());
+							System.out.println(modelo.getValueAt(i, 1).toString());
+							itemCompra.setQuantidade(Integer.valueOf(modelo.getValueAt(i, 2).toString()));
+							System.out.println(modelo.getValueAt(i, 2).toString());
+//							itemCompra.getProduto().setQuantidade(Integer.valueOf(modelo.getValueAt(i, 2).toString()));
+							itemCompra.getProduto().setValor(Double.valueOf(modelo.getValueAt(i, 3).toString()));
+							System.out.println(modelo.getValueAt(i, 3).toString());
+
+
+							lista.add(itemCompra);
+						}
+						ComprarProdutoCTRL ctrl = new ComprarProdutoCTRL();
+						if (ctrl.cadastrarNotaFiscal(Integer.valueOf(tfNotaFiscal.getText()), lista)) {
+							JOptionPane.showMessageDialog(null, "Nota fiscal cadastrada");
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Problemas ao cadastrar a nota verificar os valores inseridos");
+						}
+					}
+				});
 				btSalvar.setActionCommand("OK");
 				buttonPane.add(btSalvar);
 				getRootPane().setDefaultButton(btSalvar);
@@ -187,7 +216,7 @@ public class ComprarProduto extends JDialog {
 	// Métodos
 	private TableModel getModelo() {
 
-		String[] colunas = new String[] { "Código", "Produto", "Quant", "Preço Unitário"};
+		String[] colunas = new String[] { "Código", "Produto", "Quant", "Preço Unitário" };
 		modelo = new DefaultTableModel(null, colunas);
 
 		return modelo;
@@ -223,19 +252,21 @@ public class ComprarProduto extends JDialog {
 	}
 
 	private void preencherTabela(List<Produto> produtos) {
-		
+
 		for (Produto p : produtos) {
 			System.out.println(p.getNomeProduto());
-			modelo.addRow(new Object[] { p.getIdProduto(), p.getNomeProduto(), p.getQuantidade(), p.getValor()});
+			modelo.addRow(new Object[] { p.getIdProduto(), p.getNomeProduto(), p.getQuantidade(), p.getValor() });
 		}
 
 	}
+
 	private void cadastrarNota() {
-		int cadastrarNota = JOptionPane.showConfirmDialog(null, "Nota Fiscal não encontrada\nDeseja cadastrar a nota fiscal?");
-		if(cadastrarNota==0){
+		int cadastrarNota = JOptionPane.showConfirmDialog(null,
+				"Nota Fiscal não encontrada\nDeseja cadastrar a nota fiscal?");
+		if (cadastrarNota == 0) {
 			liberarCadastro(true);
-		}else{
-			
+		} else {
+
 		}
 	}
 

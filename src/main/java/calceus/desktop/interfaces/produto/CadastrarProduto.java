@@ -1,5 +1,6 @@
 package calceus.desktop.interfaces.produto;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -9,11 +10,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import br.com.calceus.ctrl.FornecedorCTRL;
 import br.com.calceus.ctrl.ProdutoCTRL;
+import javax.swing.DefaultComboBoxModel;
 
 public class CadastrarProduto extends JPanel {
 	private JTextField tfTamanho;
@@ -24,6 +28,7 @@ public class CadastrarProduto extends JPanel {
 	private JComboBox<String> cbMarca;
 	private JComboBox cbCategoria;
 	private JComboBox cbGenero;
+	private JComboBox cbFornecedor;
 
 	/**
 	 * Create the panel.
@@ -74,14 +79,57 @@ public class CadastrarProduto extends JPanel {
 		
 		cbCategoria = new JComboBox();
 		
-		JComboBox cbFornecedor = new JComboBox();
+		cbFornecedor = new JComboBox();
 		
 		tfCor = new JTextField();
 		tfCor.setColumns(10);
 		
 		cbGenero = new JComboBox();
+		cbGenero.setModel(new DefaultComboBoxModel(new String[] {"Selecione", "Feminino", "Masculino"}));
 		
 		cbMarca = new JComboBox();
+		
+		JButton btCadastrarCategoria = new JButton("+");
+		btCadastrarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja Cadastrar uma Nova Categoria?");
+				if(opcao == 0){
+					String categoria = JOptionPane.showInputDialog(null, "Digite o nome da Categoria:");
+					ProdutoCTRL ctrl = new ProdutoCTRL();
+					if(ctrl.salvarCategoria(categoria, "")){
+						preecheDados();
+						JOptionPane.showMessageDialog(null, "Categoria cadastrada");
+					}else{
+						JOptionPane.showMessageDialog(null, "Categoria já existe verificar o conteúdo digitado");
+					}
+				}
+			}
+		});
+		
+		JButton btCadastrarMarca = new JButton("+");
+		btCadastrarMarca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja Cadastrar uma Nova Marca?");
+				if(opcao == 0){
+					String marca = JOptionPane.showInputDialog(null, "Digite o nome da Marca:");
+					ProdutoCTRL ctrl = new ProdutoCTRL();
+					try {
+						if(ctrl.salvar(marca)){
+							preecheDados();
+							JOptionPane.showMessageDialog(null, "Marca cadastrada");
+						}else{
+							JOptionPane.showMessageDialog(null, "Marca já existe verificar o conteúdo digitado");
+						}
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -118,12 +166,11 @@ public class CadastrarProduto extends JPanel {
 												.addGroup(groupLayout.createSequentialGroup()
 													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 														.addComponent(tfProduto, Alignment.TRAILING)
-														.addGroup(groupLayout.createSequentialGroup()
-															.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-															.addPreferredGap(ComponentPlacement.UNRELATED)
-															.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(cbGenero, 0, 76, Short.MAX_VALUE))))
+														.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+													.addGap(18)
+													.addComponent(btCadastrarMarca, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+													.addGap(18)
+													.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))
 										.addGroup(groupLayout.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(cbFornecedor, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))))
@@ -140,8 +187,16 @@ public class CadastrarProduto extends JPanel {
 									.addGap(18)
 									.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap())
+									.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(btCadastrarCategoria))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
+					.addGap(108))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -149,13 +204,15 @@ public class CadastrarProduto extends JPanel {
 					.addGap(14)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_8)
-						.addComponent(cbCategoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(cbCategoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btCadastrarCategoria))
 					.addGap(17)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_9)
+						.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btCadastrarMarca)
 						.addComponent(label_3)
-						.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cbMarca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(cbGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_10)
@@ -178,7 +235,7 @@ public class CadastrarProduto extends JPanel {
 						.addComponent(tfTamanho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(tfCor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_4))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnOK)
 						.addComponent(btnLimpar)
@@ -192,19 +249,25 @@ public class CadastrarProduto extends JPanel {
 	}
 
 	private void preecheDados() {
+		cbCategoria.removeAllItems();
+		cbMarca.removeAllItems();
 		ProdutoCTRL ctrl = new ProdutoCTRL();
+		FornecedorCTRL fornecedorCTRL = new FornecedorCTRL();
 		
 		try {
-			for (String s : ctrl.listarMarcas()){
-				cbMarca.addItem(s);
+			for (String marca : ctrl.listarMarcas()){
+				cbMarca.addItem(marca);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		for(String s : ctrl.listarCategorias()){
-			cbCategoria.addItem(s);
+		for(String categoria : ctrl.listarCategorias()){
+			cbCategoria.addItem(categoria);
+		}
+		for(String fornecedor : fornecedorCTRL.listar()){
+			cbFornecedor.addItem(fornecedor);
 		}
 	}
 }

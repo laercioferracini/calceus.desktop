@@ -1,21 +1,27 @@
 package calceus.desktop.interfaces.produto;
 
-import javax.swing.JPanel;
+import java.awt.Checkbox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import br.com.calceus.ctrl.ProdutoCTRL;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import br.com.calceus.modelo.Fornecedor;
+import br.com.calceus.modelo.Produto;
+import javax.swing.JCheckBox;
 
 public class ConsultarProdutos extends JPanel {
 	/**
@@ -25,7 +31,8 @@ public class ConsultarProdutos extends JPanel {
 	private JTextField tfCodigo;
 	private JTextField tfProduto;
 	private JTable jtProdutos;
-
+	private DefaultTableModel modelo;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -39,15 +46,18 @@ public class ConsultarProdutos extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		
+		JPanel panelAlterarProduto = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
+						.addComponent(panelAlterarProduto, GroupLayout.PREFERRED_SIZE, 608, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -59,10 +69,23 @@ public class ConsultarProdutos extends JPanel {
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelAlterarProduto, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		JButton btnAlterar = new JButton("ALTERAR");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CadastrarProduto cadastrarProduto = new CadastrarProduto();
+				
+				panelAlterarProduto.removeAll();
+				panelAlterarProduto.add(cadastrarProduto);
+				panelAlterarProduto.revalidate();
+				panelAlterarProduto.repaint();
+			}
+		});
 		
 		JButton btnExcluir = new JButton("EXCLUIR");
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
@@ -73,7 +96,7 @@ public class ConsultarProdutos extends JPanel {
 					.addComponent(btnAlterar, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(366, Short.MAX_VALUE))
+					.addContainerGap(360, Short.MAX_VALUE))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -104,22 +127,10 @@ public class ConsultarProdutos extends JPanel {
 		);
 		
 		jtProdutos = new JTable();
-		jtProdutos.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"C\u00F3digo", "Produto", "Fornecedor", "Marca", "Categoria", "Quantidade", "Pre\u00E7o", "Selecionar"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		jtProdutos.setModel(getTabelaModelo());
 		jtProdutos.getColumnModel().getColumn(0).setMaxWidth(2147483615);
 		scrollPane.setViewportView(jtProdutos);
+		
 		panel_1.setLayout(gl_panel_1);
 		
 		JRadioButton rdbtnCdigo = new JRadioButton("C\u00F3digo");
@@ -139,9 +150,13 @@ public class ConsultarProdutos extends JPanel {
 		JButton btnPesquisar = new JButton("PESQUISAR");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(rdbtnCdigo.isSelected()){
-					ProdutoCTRL ctrl = new ProdutoCTRL();
+				ProdutoCTRL ctrl = new ProdutoCTRL();
+				if(rdbtnCdigo.isSelected()){					
 					ctrl.listarProduto(Integer.valueOf(tfCodigo.getText()));
+				}else if(rdbtnProduto.isSelected()){
+					ctrl.listarProduto(tfProduto.getText());
+				}else{
+					preencheTabela(ctrl.listaProdutos());
 				}
 			}
 		});
@@ -176,5 +191,16 @@ public class ConsultarProdutos extends JPanel {
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
 
+	}
+	public void preencheTabela(List<Produto> lista){
+		for (Produto f : lista) {
+			modelo.addRow(new Object[] { f.getIdProduto(), f.getNomeProduto(), f.getFornecedor().getRazaoSocial(), f.getMarca().getMarca(), f.getCategoria().getCategoria(),
+					f.getQuantidade(), f.getValor(), "-"});
+		}
+	}
+	private TableModel getTabelaModelo(){
+		Object[] colunas = new Object[] {  "C\u00F3digo", "Produto", "Fornecedor", "Marca", "Categoria", "Quantidade", "Pre\u00E7o", "Selecionar"};
+		modelo = new DefaultTableModel(null, colunas);
+		return modelo;
 	}
 }
